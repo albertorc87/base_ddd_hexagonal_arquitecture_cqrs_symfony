@@ -8,10 +8,22 @@ framework:
             # async: '%env(MESSENGER_TRANSPORT_DSN)%'
             # failed: 'doctrine://default?queue_name=failed'
             sync: 'sync://'
-
+            async_events:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+                retry_strategy:
+                    max_retries: 3
+                    delay: 1000
+                    multiplier: 2
+                    max_delay: 0
         routing:
-            # Route your messages to the transports
-            # 'App\Message\YourMessage': async
+            # Los comandos se ejecutan de forma síncrona
+            'App\Shared\Domain\Bus\Command\Command': sync
+            
+            # Las queries se ejecutan de forma síncrona
+            'App\Shared\Domain\Bus\Query\Query': sync
+            
+            'App\Shared\Domain\Bus\Event\DomainEvent': async_events
+            'App\User\User\Domain\Event\UserCreated': async_events
 
 # when@test:
 #    framework:

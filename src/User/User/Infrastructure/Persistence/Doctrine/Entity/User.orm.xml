@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="App\User\User\Domain\User" table="user">
+        <id name="id" type="user_id" column="id" length="26">
+            <generator strategy="NONE"/>
+        </id>
+
+        <embedded name="email" class="App\User\User\Domain\ValueObject\UserEmail" use-column-prefix="false"/>
+        <embedded name="password" class="App\User\User\Domain\ValueObject\UserPasswordHash" use-column-prefix="false"/>
+        <embedded name="name" class="App\User\User\Domain\ValueObject\UserName" use-column-prefix="false"/>
+        <embedded name="isEmailVerified" class="App\User\User\Domain\ValueObject\UserIsEmailVerified" use-column-prefix="false"/>
+        <embedded name="isDeleted" class="App\User\User\Domain\ValueObject\UserIsDeleted" use-column-prefix="false"/>
+        <field name="createdAt" type="datetime_immutable" column="created_at"/>
+        <field name="updatedAt" type="datetime_immutable" column="updated_at" nullable="true"/>
+        <field name="deletedAt" type="datetime_immutable" column="deleted_at" nullable="true"/>
+
+        <unique-constraints>
+            <unique-constraint name="user_email_unique" columns="email"/>
+        </unique-constraints>
+    </entity>
+
+</doctrine-mapping>

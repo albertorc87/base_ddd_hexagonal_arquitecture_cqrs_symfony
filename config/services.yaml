@@ -21,3 +21,43 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    # User Repository configuration
+    App\User\User\Domain\Repository\UserRepository:
+        alias: App\User\User\Infrastructure\Persistence\Doctrine\DoctrineUserRepository
+
+    # Commands
+    App\Shared\Domain\Bus\Command\CommandBus:
+        class: App\Shared\Infrastructure\Bus\Command\SymfonyCommandBus
+    App\User\User\Application\Command\CreateUserCommandHandler:
+        tags:
+            - { name: 'messenger.message_handler', handles: 'App\User\User\Application\Command\CreateUserCommand' }
+
+    # Exception Listener configuration
+    App\Shared\Infrastructure\Http\EventListener\ExceptionListener:
+        arguments:
+            $isDebug: '%kernel.debug%'
+        tags:
+            - { name: 'kernel.event_listener', event: 'kernel.exception', priority: -10 }
+
+    # Email Service configuration
+    App\Shared\Domain\Service\EmailService:
+        class: App\Shared\Infrastructure\Email\SymfonyEmailService
+
+        # Event Bus configuration
+    App\Shared\Domain\Bus\Event\EventBus:
+        class: App\Shared\Infrastructure\Bus\Event\SymfonyEventBus
+
+    # Event Handlers configuration
+    App\User\User\Application\EventHandler\SendUserConfirmationEmailHandler:
+        tags:
+            - { name: 'messenger.message_handler', handles: 'App\User\User\Domain\Event\UserCreated' }
+
+    # Query Bus configuration
+    App\Shared\Domain\Bus\Query\QueryBus:
+        class: App\Shared\Infrastructure\Bus\Query\SymfonyQueryBus
+
+    # Query Handlers configuration
+    App\User\User\Application\Query\GetUserQueryHandler:
+        tags:
+            - { name: 'messenger.message_handler', handles: 'App\User\User\Application\Query\GetUserQuery' }

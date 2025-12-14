@@ -1,0 +1,12 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Shared\Domain\Bus\Query;
+
+use App\Shared\Domain\DTO\DTO;
+
+interface Response
+{
+    public function toDTO(): DTO;
+}

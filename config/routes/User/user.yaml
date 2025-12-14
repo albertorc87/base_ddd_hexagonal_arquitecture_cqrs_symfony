@@ -1,0 +1,9 @@
+create_user:
+    path: /users
+    controller: App\User\User\Infrastructure\HTTP\V1\CreateUserController
+    methods:  [POST]
+
+get_user:
+    path: /users/{id}
+    controller: App\User\User\Infrastructure\HTTP\V1\GetUserController
+    methods:  [GET]

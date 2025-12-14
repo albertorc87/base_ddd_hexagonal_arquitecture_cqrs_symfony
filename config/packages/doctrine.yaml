@@ -7,21 +7,23 @@ doctrine:
         #server_version: '16'
 
         profiling_collect_backtrace: '%kernel.debug%'
+
+        # Custom Types para Value Objects
+        types:
+            user_id: App\User\User\Infrastructure\Persistence\Doctrine\UserIdType
     orm:
         validate_xml_mapping: true
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
         identity_generation_preferences:
-            Doctrine\DBAL\Platforms\PostgreSQLPlatform: identity
+            Doctrine\DBAL\Platforms\mysqlPlatform: identity
         auto_mapping: true
         mappings:
-            App:
-                type: attribute
+            User:
+                type: xml
                 is_bundle: false
-                dir: '%kernel.project_dir%/src/Entity'
-                prefix: 'App\Entity'
-                alias: App
-        controller_resolver:
-            auto_mapping: false
+                dir: '%kernel.project_dir%/src/User/User/Infrastructure/Persistence/Doctrine/Entity'
+                prefix: 'App\User\User\Domain'
+                alias: User
 
 when@test:
     doctrine:
