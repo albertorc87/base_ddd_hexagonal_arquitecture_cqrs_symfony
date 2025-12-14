@@ -1284,7 +1284,7 @@ Y lo registramos en el config/services.yaml
 ```
 
 
-Cambiar el controlador
+Ahora cambiamos el controlador src/User/User/Infrastructure/HTTP/V1/CreateUserController.php:
 
 ```php
 <?php
@@ -2214,7 +2214,7 @@ Y ahora vamos al archivo config/services.yaml y añadimos el SymfonyEventBus e i
             - { name: 'messenger.message_handler', handles: 'App\User\User\Domain\Event\UserCreated' }
 ```
 
-También vamos a crear una clase en la carpeta src/Shared/Domain/Aggregate/ llamada AggregateRoot.php que será una clase compartida por todas las clases de dominio y tendrá las funciones para añadir eventos y devolverlos.
+También vamos a crear un archivo en la carpeta src/Shared/Domain/Aggregate/ llamado AggregateRoot.php que será una clase compartida por todas las clases de dominio y tendrá las funciones para añadir eventos y devolverlos.
 
 ```php
 <?php
@@ -2244,7 +2244,7 @@ abstract class AggregateRoot
 }
 ```
 
-Modificar User para que extienda de agregateroot, en el metodo create añadimos el evento
+Ahora modificamos el dominio User para que extienda de AggregateRoot. En el método create añadimos el evento:
 
 ```php
 use App\Shared\Domain\Ulid;
