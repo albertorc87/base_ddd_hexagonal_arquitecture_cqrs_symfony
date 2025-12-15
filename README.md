@@ -33,4 +33,4 @@ El proyecto consiste en una herramienta básica de gestión de usuarios diseñad
 
 ## Tutorial completo
 
-Para seguir el tutorial completo paso a paso, consulta el archivo [TUTORIAL.md](./TUTORIAL.md).
+Para seguir el tutorial completo paso a paso, consulta el archivo [TUTORIAL.md](./TUTORIAL.md) o en mi web [https://cosasdedevs.com/posts/api-restfull-symfony-7-ddd-arquitectura-hexagonal-cqrs/](https://cosasdedevs.com/posts/api-restfull-symfony-7-ddd-arquitectura-hexagonal-cqrs/).
